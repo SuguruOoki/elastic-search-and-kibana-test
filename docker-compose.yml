@@ -7,10 +7,13 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      - discovery.type=single-node
-      - cluster.name=docker-cluster
+      - node.name=es
+      - discovery.seed_hosts=es
+      - cluster.initial_master_nodes=es
+      - cluster.name=docker-local
       - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - 'ES_JAVA_OPTS=-Xms256m -Xmx256m'
+      - bootstrap.system_call_filter=false
     ulimits:
       memlock:
         soft: -1
